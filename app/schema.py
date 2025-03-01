@@ -13,3 +13,7 @@ class User(UserBase):
     
     class config:
         orm_model = True
+
+class UserUpdate(BaseModel):
+    email:str
+    name:str

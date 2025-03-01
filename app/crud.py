@@ -12,9 +12,10 @@ def get_user(db: Session, user_id:int):
     return db.query(model.User).filter(model.User.id == user_id).first()
 
     
-def update_user(db:Session, user:schema.UserCreate):
-    db_user = model.User(id=user.user_id, email=user.email, name=user.name)
-    db.update(db_user)
+def update_user(db:Session,  user_id: int, name: str, email: str):
+    db_user = db.query(model.User).filter(model.User.id == user_id).first()
+    db_user.name = name
+    db_user.email = email
     db.commit()
     db.refresh(db_user)
     return db_user

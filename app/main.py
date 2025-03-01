@@ -28,9 +28,9 @@ def get_users(user_id:int, db:Session=Depends(get_db)):
     return users
 
 
-@app.put("/users/{user_id}", response_model=schema.UserCreate)
-def update_user(user_id:int, user:schema.UserCreate, db:Session=Depends(get_db)):
-    users =  crud.update_user(db, user_id=user_id)
+@app.put("/users/{user_id}", response_model=schema.UserUpdate)
+def update_user(user_id:int, user_data: schema.UserUpdate, db:Session=Depends(get_db)):
+    users =  crud.update_user(db, user_id=user_id, name=user_data.name, email=user_data.email)
     return users
 
 
